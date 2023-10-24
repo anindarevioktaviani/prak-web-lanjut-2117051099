@@ -220,7 +220,7 @@
 
     <div class="heroe">
 
-        <h1>Aninda Revi Oktaviani 2117051099 <?= CodeIgniter\CodeIgniter::CI_VERSION ?></h1>
+        <h1>Aninda Revi Oktaviani_2117051099 <?= CodeIgniter\CodeIgniter::CI_VERSION ?></h1>
 
         <h2>The small framework with powerful features</h2>
 
