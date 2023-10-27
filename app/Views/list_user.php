@@ -5,12 +5,16 @@
 <center>
     <h1>List User</h1>
  
-
+    <div class="row">
+        <div class="col">
+            <a href="<?= base_url('user/create')?>">Tambah Data</a>
+        </div>
+    </div>
     <div class="mask d-flex align-items-center">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12">
-
+           
                 <table class="table table-dark mb-0">
             
                     <thead>
@@ -31,6 +35,9 @@
                             <td><?= $user['nama']?></td>
                             <td><?= $user['npm']?></td>
                             <td><?= $user['nama_kelas']?></td>
+                            <td>
+                                <a href="<?= base_url('user/' . $user['id'])?>">Detail</a>
+                            </td>
                             <td><button type="button" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger">Hapus</button></td>
                         </tr>
                         <?php

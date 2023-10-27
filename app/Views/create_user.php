@@ -13,7 +13,12 @@
     <div class="container">
         <h1 class="text-center mb-4">Form Tambah Pengguna</h1>
         <center>
-        <form action="<?= base_url('/user/store')?>" method="POST">
+        <form action="<?= base_url('/user/store')?>" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <!-- <label for="nama" class="form-label">Nama</label> -->
+                <input type="file" name="foto" id="foto" class="form-control">
+            </div>
+         
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
                 <input type="text" class="form-control <?= (empty(validation_show_error('nama'))) ? '' : 'is-invalid' ?>" 

@@ -7,16 +7,16 @@ use App\Models\UserModel;
 use App\Models\KelasModel;
 class UserController extends BaseController
 {
+    protected $helpers=['Form'];
     public $userModel;
     public $kelasModel;
-
 
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->kelasModel = new KelasModel();
     }
-    protected $helpers=['Form'];
+
     public function index()
     {
         $data=[
@@ -68,7 +68,7 @@ class UserController extends BaseController
         // ];
 
         $data = [
-            'title' => 'Create User',
+            'title' => 'createuser',
             'kelas' => $kelas,
             
         ];
@@ -78,6 +78,10 @@ class UserController extends BaseController
 
     public function store(){
         $userModel = new UserModel();
+
+        $path = 'assets/uploads/img/';
+        $foto = $this->request->getFile('foto');
+        $name = $foto->getRandomName();
 
         if(!$this->validate([
             'nama' => [
@@ -98,10 +102,15 @@ class UserController extends BaseController
             return redirect()->back()->withInput();
         }
 
+        if($foto->move($path,$name)){
+            $foto = base_url ($path . $name);
+        }
+
         $userModel->saveUser([
             'nama'      => $this->request->getVar('nama'),
             'id_kelas'  => $this->request->getVar('kelas'),
             'npm'       => $this->request->getVar('npm'),
+            'foto'      => $foto
         ]);
 
         $data = [
@@ -111,7 +120,18 @@ class UserController extends BaseController
         ];
 
         return redirect()->to('/user');
+
     }
 
-  
+    public function show($id){
+        $user = $this->userModel->getUser($id);
+
+        $data = [
+            'title' => 'Profile',
+            'user'  => $user,
+        ];
+
+        return view('profile', $data);
+    }
+
 }
