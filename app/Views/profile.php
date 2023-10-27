@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Profil Saya</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <title>Halaman Profil</title>
 </head>
 <body>
-    <h1>Profil Saya</h1>
-    <img src="gambar_profil.jpg" alt="Foto Profil Saya" width="200" height="200">
-    <h2>Nama: John Doe</h2>
-    <p>Umur: 30 tahun</p>
-    <p>Alamat: Jalan Contoh No. 123, Kota Contoh</p>
-    <p>Email: john.doe@example.com</p>
-    <p>Telepon: 123-456-7890</p>
-    <p>Deskripsi Singkat: Saya adalah seorang pengembang web yang suka belajar hal baru.</p>
+    <center>
+    <br>
+    <img src="/assets/img/Reviweb.jpeg" alt="Foto Profil" style="width: 200px;border-radius :10% "><br>
+
+    <div class="badge bg-light text-dark" style="width:5rem">
+        <?= $nama?>
+    </div>
+    <br>
+
+    <div class="badge bg-light text-dark" style="width:5rem">
+        <?= $kelas?>
+    </div>
+    <br>
+
+    <div class="badge bg-light text-dark" style="width:5rem">
+        <?= $npm?>
+    </div>
+    <br>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </center>
 </body>
 </html>
