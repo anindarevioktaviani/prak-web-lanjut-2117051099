@@ -3,9 +3,10 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-
+use App\Models\UserModel;
 class UserController extends BaseController
 {
+    protected $helpers=['Form'];
     public function index()
     {
         //
@@ -25,16 +26,68 @@ class UserController extends BaseController
     }
 
     public function create(){
-        return view('create_user');
+        $kelas = [
+            [
+                'id'=> 1,
+                'nama_kelas'=>'A'
+            ],
+            [
+                'id'=> 2,
+                'nama_kelas'=>'B'
+            ],
+            [
+                'id'=> 3,
+                'nama_kelas'=>'C'
+            ],
+            [
+                'id'=> 4,
+                'nama_kelas'=>'D'
+            ],
+        ];
+
+        $data = [
+            'kelas' => $kelas,
+        ];
+
+        return view('create_user',$data);
     }
 
     public function store(){
-        // dd($this->request->getVar());
+        $userModel = new UserModel();
+
+        if(!$this->validate([
+            'nama' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama harus diisi!'
+                ]
+                ],
+            'npm' => [
+                'rules' => 'required|is_unique[user.npm]',
+                'errors' => [
+                    'required' => 'NPM harus diisi!',
+                    'is_unique' => 'NPM sudah digunakan'
+                ]
+            ]
+        ])) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $userModel->saveUser([
+            'nama'      => $this->request->getVar('nama'),
+            'id_kelas'  => $this->request->getVar('kelas'),
+            'npm'       => $this->request->getVar('npm'),
+        ]);
+
         $data = [
-            'nama' =>$this->request->getVar('nama'),
-            'npm' =>$this->request->getVar('npm'),
-            'kelas' =>$this->request->getVar('kelas'),
+            'nama' => $this->request->getVar('nama'),
+            'npm' => $this->request->getVar('npm'),
+            'kelas' => $this->request->getVar('kelas'),
         ];
-        return view('profile',$data);
+
+        return view('profile', $data);
     }
+
+  
 }
