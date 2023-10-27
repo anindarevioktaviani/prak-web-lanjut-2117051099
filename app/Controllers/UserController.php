@@ -4,11 +4,27 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UserModel;
+use App\Models\KelasModel;
 class UserController extends BaseController
 {
+    public $userModel;
+    public $kelasModel;
+
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+        $this->kelasModel = new KelasModel();
+    }
     protected $helpers=['Form'];
     public function index()
     {
+        $data=[
+            'title'=>'List User',
+            'users'=> $this->userModel->getUser(),
+        
+        ];
+        return view('list_user',$data);
         //
     }
 
@@ -26,27 +42,35 @@ class UserController extends BaseController
     }
 
     public function create(){
-        $kelas = [
-            [
-                'id'=> 1,
-                'nama_kelas'=>'A'
-            ],
-            [
-                'id'=> 2,
-                'nama_kelas'=>'B'
-            ],
-            [
-                'id'=> 3,
-                'nama_kelas'=>'C'
-            ],
-            [
-                'id'=> 4,
-                'nama_kelas'=>'D'
-            ],
-        ];
+        // $kelasModel = new KelasModel();
+        $kelas =$this->kelasModel -> getKelas();
+        // $data = [
+        //     'kelas'=> $kelas,
+        // ];
+        // return view('create_user',$data);
+        // $kelas = [
+        //     [
+        //         'id'=> 1,
+        //         'nama_kelas'=>'A'
+        //     ],
+        //     [
+        //         'id'=> 2,
+        //         'nama_kelas'=>'B'
+        //     ],
+        //     [
+        //         'id'=> 3,
+        //         'nama_kelas'=>'C'
+        //     ],
+        //     [
+        //         'id'=> 4,
+        //         'nama_kelas'=>'D'
+        //     ],
+        // ];
 
         $data = [
+            'title' => 'Create User',
             'kelas' => $kelas,
+            
         ];
 
         return view('create_user',$data);
@@ -86,7 +110,7 @@ class UserController extends BaseController
             'kelas' => $this->request->getVar('kelas'),
         ];
 
-        return view('profile', $data);
+        return redirect()->to('/user');
     }
 
   
