@@ -1,0 +1,50 @@
+body {
+    background-color: #E2BCAC ;
+}
+.container {
+    margin-top: 50px;
+    background-color: #f7dfd4;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.form-control {
+    width: 60%;
+}
+
+.btn-custom {
+    background-color: #874e4c; /* Ganti warna sesuai preferensi Anda */
+    border-color: #E2BCAC;
+    color: #ffffff; /* Warna teks */
+}
+.btn-custom:hover {
+    background-color: #E2BCAC; /* Warna hover */
+    border-color: #E2BCAC;
+}
+
+
+
+.intro {
+  height: 100%;
+}
+
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+thead th,
+tbody th {
+  color: #fff;
+}
+
+tbody td {
+  font-weight: 500;
+  color: rgba(255,255,255,.65);
+}
+
+.card {
+  border-radius: .5rem;
+}
