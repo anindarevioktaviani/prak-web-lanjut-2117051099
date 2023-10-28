@@ -1,56 +1,54 @@
-<?=$this->extend('layouts/app')?>
+<?= $this->extend('layouts/app') ?>
 
-<?=$this->section('content')?>
+<?= $this->section('content') ?>
+<head>
+    
+</head>
+<body>
+    <div class = "container-box"> 
+
+    
+
 <?php $id = 1; ?>
-<center>
-    <h1>List User</h1>
- 
-    <div class="row">
-        <div class="col">
-            <a href="<?= base_url('user/create')?>">Tambah Data</a>
-        </div>
-    </div>
-    <div class="mask d-flex align-items-center">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12">
-           
-                <table class="table table-dark mb-0">
-            
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>NPM</th>
-                            <th>Kelas</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($users as $user){
-                        ?>
-                        <tr>
-                            <td><?php echo $id++ ?></td>
-                            <td><?= $user['nama']?></td>
-                            <td><?= $user['npm']?></td>
-                            <td><?= $user['nama_kelas']?></td>
-                            <td>
-                                <a href="<?= base_url('user/' . $user['id'])?>">Detail</a>
-                            </td>
-                            <td><button type="button" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger">Hapus</button></td>
-                        </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody> 
-                </table>
-              </div>
-            </div>
-        </div>
-    </div>
 
-</div>
-</section>
-</center>
-<?=$this->endSection()?>
+
+    <a href= "<?= base_url('user/create')?>">tambah data</a>
+
+    <table class="table table-hover table-striped">
+        <thead class="costum-table">
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>NPM</th>
+                <th>Kelas</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($users as $user){
+            ?>
+            <tr>
+                <td><?= $id++ ?></td>
+                <td><?= $user['nama']?></td>
+                <td><?= $user['npm']?></td>
+                <td><?= $user['nama_kelas']?></td>
+                <td>
+                    <a href="<?= base_url('user/'. $user['id'])?>">Detail</a>
+                    <a href="<?= base_url('/user/' . $user['id'] . '/edit') ?>" type="button">Edit</a>
+                    <form action="<?= base_url('user/' . $user['id']) ?>" method="post" style="display:inline-block">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+        </tbody>
+    </table>
+    </div>
+    </body>
+
+<?= $this->endsection() ?>
